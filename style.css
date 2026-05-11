@@ -63,3 +63,39 @@ nav {
   display: flex; align-items: center; gap: .5rem;
 }
 #nav-user strong { color: var(--ink); }
+
+/* ─── BOTONES ────────────────────────────────────────────── */
+.btn {
+  font-family: var(--font-b);
+  font-size: .875rem;
+  font-weight: 500;
+  padding: .55rem 1.25rem;
+  border-radius: var(--r);
+  border: none;
+  cursor: pointer;
+  transition: transform .15s var(--ease), box-shadow .15s var(--ease), background .15s;
+  white-space: nowrap;
+}
+.btn:hover  { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+ 
+.btn-primary {
+  background: var(--amber); color: #fff;
+  box-shadow: 0 2px 8px rgba(200,131,42,.35);
+}
+.btn-primary:hover { background: var(--amber2); box-shadow: 0 4px 16px rgba(200,131,42,.45); }
+ 
+.btn-ghost {
+  background: transparent; color: var(--ink);
+  border: 1.5px solid var(--cream);
+}
+.btn-ghost:hover { background: var(--cream); border-color: var(--amber); color: var(--amber); }
+ 
+.btn-danger {
+  background: transparent; color: var(--rust);
+  border: 1.5px solid transparent; padding: .4rem .8rem;
+}
+.btn-danger:hover { background: rgba(155,59,26,.08); border-color: var(--rust); }
+ 
+.btn-sm   { padding: .35rem .8rem; font-size: .8rem; }
+.btn-full { width: 100%; justify-content: center; }

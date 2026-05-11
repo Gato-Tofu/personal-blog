@@ -228,3 +228,49 @@ function editPost(id) {
   if (!session) { showToast('Inicia sesión primero.', 'error'); showPage('login'); return; }
   showPage('post-form', id);
 }
+
+/* ══════════════════════════════════════════════════════════
+   RENDERIZADO
+   ══════════════════════════════════════════════════════════ */
+ 
+/** Renderiza la grilla de publicaciones */
+function renderPosts() {
+  const posts   = getPosts();
+  const session = getSession();
+  const grid    = $('posts-grid');
+ 
+  $('posts-count').textContent =
+    `${posts.length} publicación${posts.length !== 1 ? 'es' : ''}`;
+ 
+  if (posts.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-state">
+        <div class="icon">✍️</div>
+        <h3>Aún no hay publicaciones</h3>
+        <p>Sé el primero en compartir algo increíble.</p>
+        ${session ? `<button class="btn btn-primary" onclick="showPage('post-form')">Crear primera entrada</button>` : ''}
+      </div>`;
+    return;
+  }
+ 
+  grid.innerHTML = posts.map(p => {
+    const mine    = session && p.authorId === session.id;
+    const excerpt = p.content.length > 180 ? p.content.slice(0, 180) + '…' : p.content;
+    return `
+      <article class="post-card">
+        <div class="post-card-body">
+          <div class="post-card-date">${fmtDate(p.createdAt)}${p.updatedAt ? ' · editado' : ''}</div>
+          <div class="post-card-title" onclick='showPage("post-detail","${p.id}")'>${esc(p.title)}</div>
+          <div class="post-card-excerpt">${esc(excerpt)}</div>
+        </div>
+        <div class="post-card-footer">
+          <button class="btn btn-ghost btn-sm" onclick='showPage("post-detail","${p.id}")'>Leer →</button>
+          ${mine ? `
+            <button class="btn btn-ghost btn-sm" onclick='editPost("${p.id}")'>Editar</button>
+            <button class="btn btn-danger btn-sm" onclick='deletePost("${p.id}")'>Eliminar</button>
+          ` : ''}
+          <span class="post-card-author">por ${esc(p.authorName)}</span>
+        </div>
+      </article>`;
+  }).join('');
+}

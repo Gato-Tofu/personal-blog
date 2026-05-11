@@ -130,3 +130,23 @@ nav {
 }
 .auth-divider::before { left: 0; }
 .auth-divider::after  { right: 0; }
+
+/* ─── FORMULARIOS ────────────────────────────────────────── */
+.form-group { margin-bottom: 1.1rem; }
+.form-group label {
+  display: block; font-size: .8rem; font-weight: 500;
+  color: var(--ink); margin-bottom: .4rem;
+  letter-spacing: .02em; text-transform: uppercase;
+}
+.form-group input, .form-group textarea {
+  width: 100%; font-family: var(--font-b); font-size: .9rem;
+  padding: .7rem 1rem; border: 1.5px solid var(--cream);
+  border-radius: var(--r); background: var(--paper); color: var(--ink);
+  transition: border-color .2s, box-shadow .2s; outline: none;
+}
+.form-group input:focus, .form-group textarea:focus {
+  border-color: var(--amber); box-shadow: 0 0 0 3px rgba(200,131,42,.15); background: #fff;
+}
+.form-group textarea { resize: vertical; min-height: 180px; line-height: 1.7; }
+.form-error { font-size: .8rem; color: var(--rust); margin-top: .35rem; display: none; }
+.form-error.show { display: block; }

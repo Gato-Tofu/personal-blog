@@ -13,9 +13,10 @@ Aplicación web tipo blog personal con autenticación de usuarios, CRUD de publi
 ## Estructura del Proyecto
 
 ```
-blog-app/
-├── index.html      # Aplicación completa (SPA)
-└── README.md       # Este archivo
+personal-blog/
+├── index.html
+├── styles.css 
+└── app.js 
 
 ## Tecnologías
 

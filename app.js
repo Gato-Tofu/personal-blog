@@ -62,3 +62,25 @@ const getSession = () => JSON.parse(localStorage.getItem(SESSION_KEY) || 'null')
 const saveUsers   = u => localStorage.setItem(USERS_KEY,   JSON.stringify(u));
 const savePosts   = p => localStorage.setItem(POSTS_KEY,   JSON.stringify(p));
 const saveSession = s => localStorage.setItem(SESSION_KEY, JSON.stringify(s));
+
+/* ══════════════════════════════════════════════════════════
+   NAVEGACIÓN — router de páginas
+   ══════════════════════════════════════════════════════════ */
+ 
+/** Muestra una página y oculta las demás */
+function showPage(name, data = null) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = $(`page-${name}`);
+  if (target) target.classList.add('active');
+ 
+  if (name === 'blog')                renderPosts();
+  if (name === 'post-form')           setupForm(data || null);
+  if (name === 'post-detail' && data) renderDetail(data);
+ 
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+ 
+/** Navega al inicio según si hay sesión activa */
+function goHome() {
+  getSession() ? showPage('blog') : showPage('landing');
+}

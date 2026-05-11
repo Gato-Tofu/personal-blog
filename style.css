@@ -208,3 +208,27 @@ nav {
 .post-card-excerpt { font-size: .875rem; color: #555; line-height: 1.65; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .post-card-footer { padding: .9rem 1.5rem; border-top: 1px solid var(--cream); display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
 .post-card-author { font-size: .78rem; color: var(--mist); margin-left: auto; }
+
+/* ─── ESTADO VACÍO ───────────────────────────────────────── */
+.empty-state { text-align: center; padding: 5rem 2rem; grid-column: 1 / -1; }
+.empty-state .icon { font-size: 3.5rem; margin-bottom: 1rem; }
+.empty-state h3 { font-family: var(--font-h); font-size: 1.4rem; margin-bottom: .5rem; }
+.empty-state p { color: var(--mist); margin-bottom: 1.5rem; }
+ 
+/* ─── VISTA DETALLE DE POST ──────────────────────────────── */
+.post-detail { max-width: 720px; margin: 0 auto; padding: 3rem clamp(1rem,5vw,2rem); }
+.post-detail-back {
+  display: inline-flex; align-items: center; gap: .4rem;
+  font-size: .85rem; color: var(--mist); cursor: pointer; margin-bottom: 2rem; transition: color .2s;
+}
+.post-detail-back:hover { color: var(--amber); }
+.post-detail-meta { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.post-detail-date { font-size: .8rem; color: var(--mist); text-transform: uppercase; letter-spacing: .04em; }
+.post-detail-author { font-size: .8rem; background: var(--cream); padding: .25rem .7rem; border-radius: 20px; color: var(--sage); }
+.post-detail h1 { font-family: var(--font-h); font-size: clamp(1.8rem,4vw,2.4rem); line-height: 1.2; margin-bottom: 2rem; }
+.post-detail-content { font-size: 1rem; line-height: 1.85; color: #333; white-space: pre-wrap; word-break: break-word; }
+.post-detail-actions { display: flex; gap: .75rem; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--cream); }
+ 
+/* ─── FORMULARIO DE POST ─────────────────────────────────── */
+.post-form-wrap { max-width: 720px; margin: 0 auto; padding: 3rem clamp(1rem,5vw,2rem); }
+.post-form-wrap h2 { font-family: var(--font-h); font-size: 1.8rem; margin-bottom: 2rem; }

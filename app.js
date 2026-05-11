@@ -274,3 +274,37 @@ function renderPosts() {
       </article>`;
   }).join('');
 }
+
+/** Muestra el detalle completo de una publicación */
+function renderDetail(id) {
+  const post    = getPosts().find(p => p.id === id);
+  const session = getSession();
+  if (!post) { showPage('blog'); return; }
+ 
+  $('detail-date').textContent    = fmtDate(post.createdAt) + (post.updatedAt ? ' · editado' : '');
+  $('detail-author').textContent  = 'por ' + post.authorName;
+  $('detail-title').textContent   = post.title;
+  $('detail-content').textContent = post.content;
+ 
+  const mine = session && post.authorId === session.id;
+  $('detail-actions').innerHTML = mine ? `
+    <button class="btn btn-ghost"  onclick='editPost("${post.id}")'>Editar</button>
+    <button class="btn btn-danger" onclick='deletePost("${post.id}")'>Eliminar</button>
+  ` : '';
+}
+ 
+/** Configura el formulario para crear o editar */
+function setupForm(editId) {
+  $('edit-id').value = editId || '';
+  if (editId) {
+    const post = getPosts().find(p => p.id === editId);
+    if (post) {
+      $('form-title').textContent = 'Editar publicación';
+      $('post-title').value   = post.title;
+      $('post-content').value = post.content;
+      return;
+    }
+  }
+  $('form-title').textContent = 'Nueva publicación';
+  $('post-title').value = $('post-content').value = '';
+}

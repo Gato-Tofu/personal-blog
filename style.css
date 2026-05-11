@@ -26,3 +26,40 @@
 /* ─── UTILIDADES ─────────────────────────────────────────── */
 .hidden { display: none !important; }
 .sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+
+/* ─── BODY ───────────────────────────────────────────────── */
+body {
+  font-family: var(--font-b);
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(200,131,42,.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 80% 90%, rgba(74,103,65,.06) 0%, transparent 60%);
+}
+ 
+/* ─── NAVBAR ─────────────────────────────────────────────── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(245,240,232,.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--cream);
+  padding: 0 clamp(1rem,5vw,3rem);
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+.nav-brand {
+  font-family: var(--font-h);
+  font-size: 1.5rem;
+  color: var(--amber);
+  letter-spacing: -.5px;
+  cursor: pointer;
+  display: flex; align-items: center; gap: .5rem;
+}
+.nav-brand span { font-style: italic; color: var(--rust); }
+.nav-right { display: flex; align-items: center; gap: 1rem; }
+#nav-user {
+  font-size: .85rem; color: var(--mist);
+  display: flex; align-items: center; gap: .5rem;
+}
+#nav-user strong { color: var(--ink); }

@@ -168,3 +168,48 @@ function logout() {
   showToast('Sesión cerrada. ¡Hasta pronto!');
   showPage('landing');
 }
+
+/* ══════════════════════════════════════════════════════════
+   CRUD DE PUBLICACIONES
+   ══════════════════════════════════════════════════════════ */
+ 
+/** Guarda una publicación nueva o actualiza una existente */
+function savePost() {
+  clearErrors();
+  const title   = $('post-title').value.trim();
+  const content = $('post-content').value.trim();
+  const editId  = $('edit-id').value;
+  let ok = true;
+ 
+  if (!title)   { showErr('err-post-title');   ok = false; }
+  if (!content) { showErr('err-post-content'); ok = false; }
+  if (!ok) return;
+ 
+  const session = getSession();
+  if (!session) { showToast('Sesión expirada.', 'error'); showPage('login'); return; }
+ 
+  const posts = getPosts();
+ 
+  if (editId) {
+    const idx = posts.findIndex(p => p.id === editId);
+    if (idx > -1) {
+      posts[idx].title     = title;
+      posts[idx].content   = content;
+      posts[idx].updatedAt = new Date().toISOString();
+    }
+    savePosts(posts);
+    showToast('Publicación actualizada ✓');
+  } else {
+    const post = {
+      id: uid(), title, content,
+      authorId:   session.id,
+      authorName: session.name,
+      createdAt:  new Date().toISOString(),
+      updatedAt:  null,
+    };
+    posts.unshift(post);
+    savePosts(posts);
+    showToast('Publicación creada ✓');
+  }
+  showPage('blog');
+}

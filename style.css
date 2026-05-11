@@ -1,0 +1,28 @@
+/* ═══════════════════════════════════════════════════════════
+   BlogVault — styles.css
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── RESET ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+/* ─── TOKENS DE DISEÑO ───────────────────────────────────── */
+:root {
+  --ink:    #1a1209;
+  --paper:  #f5f0e8;
+  --cream:  #ede7d3;
+  --amber:  #c8832a;
+  --amber2: #e09a3f;
+  --rust:   #9b3b1a;
+  --sage:   #4a6741;
+  --mist:   #8a9b8e;
+  --shadow: rgba(26,18,9,0.12);
+  --r:      6px;
+  --r-lg:   12px;
+  --font-h: 'Playfair Display', serif;
+  --font-b: 'DM Sans', sans-serif;
+  --ease:   cubic-bezier(.4,0,.2,1);
+}
+ 
+/* ─── UTILIDADES ─────────────────────────────────────────── */
+.hidden { display: none !important; }
+.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }

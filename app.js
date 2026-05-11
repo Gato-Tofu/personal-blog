@@ -308,3 +308,27 @@ function setupForm(editId) {
   $('form-title').textContent = 'Nueva publicación';
   $('post-title').value = $('post-content').value = '';
 }
+
+/* ══════════════════════════════════════════════════════════
+   VALIDACIÓN
+   ══════════════════════════════════════════════════════════ */
+ 
+/** Muestra un mensaje de error en un campo */
+function showErr(id, msg) {
+  const el = $(id);
+  if (msg) el.textContent = msg;
+  el.classList.add('show');
+}
+ 
+/** Limpia todos los mensajes de error visibles */
+function clearErrors() {
+  document.querySelectorAll('.form-error').forEach(e => e.classList.remove('show'));
+}
+ 
+/* ══════════════════════════════════════════════════════════
+   INICIALIZACIÓN
+   ══════════════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  updateNav();
+  getSession() ? showPage('blog') : showPage('landing');
+});

@@ -213,3 +213,18 @@ function savePost() {
   }
   showPage('blog');
 }
+
+/** Elimina una publicación por ID con confirmación */
+function deletePost(id) {
+  if (!confirm('¿Eliminar esta publicación? Esta acción no se puede deshacer.')) return;
+  savePosts(getPosts().filter(p => p.id !== id));
+  showToast('Publicación eliminada.');
+  showPage('blog');
+}
+ 
+/** Abre el formulario de edición con los datos del post */
+function editPost(id) {
+  const session = getSession();
+  if (!session) { showToast('Inicia sesión primero.', 'error'); showPage('login'); return; }
+  showPage('post-form', id);
+}

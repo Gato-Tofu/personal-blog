@@ -136,3 +136,35 @@ function register() {
   showPage('blog');
   $('reg-name').value = $('reg-email').value = $('reg-pass').value = '';
 }
+
+/** Inicia sesión verificando credenciales */
+function loginUser() {
+  clearErrors();
+  const email = $('login-email').value.trim().toLowerCase();
+  const pass  = $('login-pass').value;
+  let ok = true;
+ 
+  if (!email) { showErr('err-login-email'); ok = false; }
+  if (!pass)  { showErr('err-login-pass');  ok = false; }
+  if (!ok) return;
+ 
+  const user = getUsers().find(u => u.email === email && u.passHash === hashPass(pass));
+  if (!user) {
+    showErr('err-login-email', 'Correo o contraseña incorrectos.');
+    return;
+  }
+ 
+  saveSession({ id: user.id, name: user.name, email: user.email });
+  updateNav();
+  showToast(`¡Hola de nuevo, ${user.name}!`);
+  showPage('blog');
+  $('login-email').value = $('login-pass').value = '';
+}
+ 
+/** Cierra la sesión activa */
+function logout() {
+  localStorage.removeItem(SESSION_KEY);
+  updateNav();
+  showToast('Sesión cerrada. ¡Hasta pronto!');
+  showPage('landing');
+}

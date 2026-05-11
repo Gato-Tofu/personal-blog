@@ -84,3 +84,55 @@ function showPage(name, data = null) {
 function goHome() {
   getSession() ? showPage('blog') : showPage('landing');
 }
+
+/* ══════════════════════════════════════════════════════════
+   AUTENTICACIÓN
+   ══════════════════════════════════════════════════════════ */
+ 
+/** Actualiza la barra de navegación según el estado de sesión */
+function updateNav() {
+  const session = getSession();
+  if (session) {
+    $('nav-user').classList.remove('hidden');
+    $('nav-username').textContent = session.name;
+    $('btn-new-post').classList.remove('hidden');
+    $('btn-logout').classList.remove('hidden');
+    $('btn-nav-login').classList.add('hidden');
+    $('btn-nav-reg').classList.add('hidden');
+  } else {
+    $('nav-user').classList.add('hidden');
+    $('btn-new-post').classList.add('hidden');
+    $('btn-logout').classList.add('hidden');
+    $('btn-nav-login').classList.remove('hidden');
+    $('btn-nav-reg').classList.remove('hidden');
+  }
+}
+ 
+/** Registra un nuevo usuario */
+function register() {
+  clearErrors();
+  const name  = $('reg-name').value.trim();
+  const email = $('reg-email').value.trim().toLowerCase();
+  const pass  = $('reg-pass').value;
+  let ok = true;
+ 
+  if (!name)                          { showErr('err-reg-name');  ok = false; }
+  if (!email || !email.includes('@')) { showErr('err-reg-email'); ok = false; }
+  if (pass.length < 6)                { showErr('err-reg-pass');  ok = false; }
+  if (!ok) return;
+ 
+  const users = getUsers();
+  if (users.find(u => u.email === email)) {
+    showErr('err-reg-email', 'Este correo ya está registrado.');
+    return;
+  }
+ 
+  const user = { id: uid(), name, email, passHash: hashPass(pass) };
+  users.push(user);
+  saveUsers(users);
+  saveSession({ id: user.id, name: user.name, email: user.email });
+  updateNav();
+  showToast(`¡Bienvenido, ${name}! 🎉`);
+  showPage('blog');
+  $('reg-name').value = $('reg-email').value = $('reg-pass').value = '';
+}

@@ -150,3 +150,31 @@ nav {
 .form-group textarea { resize: vertical; min-height: 180px; line-height: 1.7; }
 .form-error { font-size: .8rem; color: var(--rust); margin-top: .35rem; display: none; }
 .form-error.show { display: block; }
+
+/* ─── TOAST ──────────────────────────────────────────────── */
+#toast {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 999;
+  background: var(--ink); color: var(--paper);
+  padding: .8rem 1.4rem; border-radius: var(--r); font-size: .875rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,.2);
+  transform: translateY(120%); transition: transform .3s var(--ease); max-width: 320px;
+}
+#toast.show    { transform: translateY(0); }
+#toast.success { background: var(--sage); }
+#toast.error   { background: var(--rust); }
+ 
+/* ─── HERO (LANDING) ─────────────────────────────────────── */
+.hero { text-align: center; padding: 6rem 1rem 4rem; }
+.hero-tag {
+  display: inline-block; font-size: .75rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--amber);
+  background: rgba(200,131,42,.1); border: 1px solid rgba(200,131,42,.25);
+  padding: .35rem 1rem; border-radius: 20px; margin-bottom: 1.5rem;
+}
+.hero h1 {
+  font-family: var(--font-h); font-size: clamp(2.4rem, 6vw, 4rem);
+  line-height: 1.1; max-width: 680px; margin: 0 auto 1rem;
+}
+.hero h1 em { color: var(--amber); font-style: italic; }
+.hero p { font-size: 1.1rem; color: #666; max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.7; }
+.hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }

@@ -1,0 +1,242 @@
+/* ═══════════════════════════════════════════════════════════
+   BlogVault — styles.css
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── RESET ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+/* ─── TOKENS DE DISEÑO ───────────────────────────────────── */
+:root {
+  --ink:    #1a1209;
+  --paper:  #f5f0e8;
+  --cream:  #ede7d3;
+  --amber:  #c8832a;
+  --amber2: #e09a3f;
+  --rust:   #9b3b1a;
+  --sage:   #4a6741;
+  --mist:   #8a9b8e;
+  --shadow: rgba(26,18,9,0.12);
+  --r:      6px;
+  --r-lg:   12px;
+  --font-h: 'Playfair Display', serif;
+  --font-b: 'DM Sans', sans-serif;
+  --ease:   cubic-bezier(.4,0,.2,1);
+}
+ 
+/* ─── UTILIDADES ─────────────────────────────────────────── */
+.hidden { display: none !important; }
+.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+
+/* ─── BODY ───────────────────────────────────────────────── */
+body {
+  font-family: var(--font-b);
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(200,131,42,.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 80% 90%, rgba(74,103,65,.06) 0%, transparent 60%);
+}
+ 
+/* ─── NAVBAR ─────────────────────────────────────────────── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(245,240,232,.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--cream);
+  padding: 0 clamp(1rem,5vw,3rem);
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+.nav-brand {
+  font-family: var(--font-h);
+  font-size: 1.5rem;
+  color: var(--amber);
+  letter-spacing: -.5px;
+  cursor: pointer;
+  display: flex; align-items: center; gap: .5rem;
+}
+.nav-brand span { font-style: italic; color: var(--rust); }
+.nav-right { display: flex; align-items: center; gap: 1rem; }
+#nav-user {
+  font-size: .85rem; color: var(--mist);
+  display: flex; align-items: center; gap: .5rem;
+}
+#nav-user strong { color: var(--ink); }
+
+/* ─── BOTONES ────────────────────────────────────────────── */
+.btn {
+  font-family: var(--font-b);
+  font-size: .875rem;
+  font-weight: 500;
+  padding: .55rem 1.25rem;
+  border-radius: var(--r);
+  border: none;
+  cursor: pointer;
+  transition: transform .15s var(--ease), box-shadow .15s var(--ease), background .15s;
+  white-space: nowrap;
+}
+.btn:hover  { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+ 
+.btn-primary {
+  background: var(--amber); color: #fff;
+  box-shadow: 0 2px 8px rgba(200,131,42,.35);
+}
+.btn-primary:hover { background: var(--amber2); box-shadow: 0 4px 16px rgba(200,131,42,.45); }
+ 
+.btn-ghost {
+  background: transparent; color: var(--ink);
+  border: 1.5px solid var(--cream);
+}
+.btn-ghost:hover { background: var(--cream); border-color: var(--amber); color: var(--amber); }
+ 
+.btn-danger {
+  background: transparent; color: var(--rust);
+  border: 1.5px solid transparent; padding: .4rem .8rem;
+}
+.btn-danger:hover { background: rgba(155,59,26,.08); border-color: var(--rust); }
+ 
+.btn-sm   { padding: .35rem .8rem; font-size: .8rem; }
+.btn-full { width: 100%; justify-content: center; }
+
+/* ─── TRANSICIONES DE PÁGINA ─────────────────────────────── */
+.page { display: none; animation: fadeUp .35s var(--ease) both; }
+.page.active { display: block; }
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(14px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+ 
+/* ─── PÁGINAS DE AUTENTICACIÓN ───────────────────────────── */
+.auth-wrap {
+  min-height: calc(100vh - 64px);
+  display: flex; align-items: center; justify-content: center; padding: 2rem 1rem;
+}
+.auth-card {
+  background: #fff; border: 1px solid var(--cream);
+  border-radius: var(--r-lg); box-shadow: 0 8px 40px var(--shadow);
+  padding: 2.5rem; width: 100%; max-width: 420px;
+}
+.auth-card h2 { font-family: var(--font-h); font-size: 1.8rem; margin-bottom: .35rem; }
+.auth-card .subtitle { font-size: .875rem; color: var(--mist); margin-bottom: 2rem; }
+.auth-divider {
+  text-align: center; margin: 1.25rem 0;
+  font-size: .8rem; color: var(--mist); position: relative;
+}
+.auth-divider::before, .auth-divider::after {
+  content: ''; position: absolute; top: 50%;
+  width: calc(50% - 2rem); height: 1px; background: var(--cream);
+}
+.auth-divider::before { left: 0; }
+.auth-divider::after  { right: 0; }
+
+/* ─── FORMULARIOS ────────────────────────────────────────── */
+.form-group { margin-bottom: 1.1rem; }
+.form-group label {
+  display: block; font-size: .8rem; font-weight: 500;
+  color: var(--ink); margin-bottom: .4rem;
+  letter-spacing: .02em; text-transform: uppercase;
+}
+.form-group input, .form-group textarea {
+  width: 100%; font-family: var(--font-b); font-size: .9rem;
+  padding: .7rem 1rem; border: 1.5px solid var(--cream);
+  border-radius: var(--r); background: var(--paper); color: var(--ink);
+  transition: border-color .2s, box-shadow .2s; outline: none;
+}
+.form-group input:focus, .form-group textarea:focus {
+  border-color: var(--amber); box-shadow: 0 0 0 3px rgba(200,131,42,.15); background: #fff;
+}
+.form-group textarea { resize: vertical; min-height: 180px; line-height: 1.7; }
+.form-error { font-size: .8rem; color: var(--rust); margin-top: .35rem; display: none; }
+.form-error.show { display: block; }
+
+/* ─── TOAST ──────────────────────────────────────────────── */
+#toast {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 999;
+  background: var(--ink); color: var(--paper);
+  padding: .8rem 1.4rem; border-radius: var(--r); font-size: .875rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,.2);
+  transform: translateY(120%); transition: transform .3s var(--ease); max-width: 320px;
+}
+#toast.show    { transform: translateY(0); }
+#toast.success { background: var(--sage); }
+#toast.error   { background: var(--rust); }
+ 
+/* ─── HERO (LANDING) ─────────────────────────────────────── */
+.hero { text-align: center; padding: 6rem 1rem 4rem; }
+.hero-tag {
+  display: inline-block; font-size: .75rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--amber);
+  background: rgba(200,131,42,.1); border: 1px solid rgba(200,131,42,.25);
+  padding: .35rem 1rem; border-radius: 20px; margin-bottom: 1.5rem;
+}
+.hero h1 {
+  font-family: var(--font-h); font-size: clamp(2.4rem, 6vw, 4rem);
+  line-height: 1.1; max-width: 680px; margin: 0 auto 1rem;
+}
+.hero h1 em { color: var(--amber); font-style: italic; }
+.hero p { font-size: 1.1rem; color: #666; max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.7; }
+.hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* ─── BLOG HOME ──────────────────────────────────────────── */
+.blog-layout { max-width: 1100px; margin: 0 auto; padding: 3rem clamp(1rem,5vw,3rem); }
+.blog-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem;
+}
+.blog-header h1 { font-family: var(--font-h); font-size: clamp(1.8rem,4vw,2.6rem); line-height: 1.15; }
+.blog-header h1 em { color: var(--amber); font-style: italic; }
+.blog-count {
+  font-size: .8rem; color: var(--mist);
+  background: var(--cream); padding: .3rem .8rem;
+  border-radius: 20px; margin-top: .4rem;
+}
+ 
+/* ─── TARJETAS DE POST ───────────────────────────────────── */
+.posts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+.post-card {
+  background: #fff; border: 1px solid var(--cream); border-radius: var(--r-lg);
+  overflow: hidden; display: flex; flex-direction: column;
+  transition: transform .2s var(--ease), box-shadow .2s var(--ease);
+}
+.post-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px var(--shadow); }
+.post-card-body { padding: 1.5rem; flex: 1; }
+.post-card-date { font-size: .75rem; color: var(--mist); letter-spacing: .04em; text-transform: uppercase; margin-bottom: .6rem; }
+.post-card-title { font-family: var(--font-h); font-size: 1.15rem; margin-bottom: .65rem; line-height: 1.35; color: var(--ink); cursor: pointer; }
+.post-card-title:hover { color: var(--amber); }
+.post-card-excerpt { font-size: .875rem; color: #555; line-height: 1.65; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.post-card-footer { padding: .9rem 1.5rem; border-top: 1px solid var(--cream); display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
+.post-card-author { font-size: .78rem; color: var(--mist); margin-left: auto; }
+
+/* ─── ESTADO VACÍO ───────────────────────────────────────── */
+.empty-state { text-align: center; padding: 5rem 2rem; grid-column: 1 / -1; }
+.empty-state .icon { font-size: 3.5rem; margin-bottom: 1rem; }
+.empty-state h3 { font-family: var(--font-h); font-size: 1.4rem; margin-bottom: .5rem; }
+.empty-state p { color: var(--mist); margin-bottom: 1.5rem; }
+ 
+/* ─── VISTA DETALLE DE POST ──────────────────────────────── */
+.post-detail { max-width: 720px; margin: 0 auto; padding: 3rem clamp(1rem,5vw,2rem); }
+.post-detail-back {
+  display: inline-flex; align-items: center; gap: .4rem;
+  font-size: .85rem; color: var(--mist); cursor: pointer; margin-bottom: 2rem; transition: color .2s;
+}
+.post-detail-back:hover { color: var(--amber); }
+.post-detail-meta { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.post-detail-date { font-size: .8rem; color: var(--mist); text-transform: uppercase; letter-spacing: .04em; }
+.post-detail-author { font-size: .8rem; background: var(--cream); padding: .25rem .7rem; border-radius: 20px; color: var(--sage); }
+.post-detail h1 { font-family: var(--font-h); font-size: clamp(1.8rem,4vw,2.4rem); line-height: 1.2; margin-bottom: 2rem; }
+.post-detail-content { font-size: 1rem; line-height: 1.85; color: #333; white-space: pre-wrap; word-break: break-word; }
+.post-detail-actions { display: flex; gap: .75rem; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--cream); }
+ 
+/* ─── FORMULARIO DE POST ─────────────────────────────────── */
+.post-form-wrap { max-width: 720px; margin: 0 auto; padding: 3rem clamp(1rem,5vw,2rem); }
+.post-form-wrap h2 { font-family: var(--font-h); font-size: 1.8rem; margin-bottom: 2rem; }
+
+/* ─── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .auth-card { padding: 1.75rem 1.25rem; }
+  nav { padding: 0 1rem; }
+  .posts-grid { grid-template-columns: 1fr; }
+  .blog-header { flex-direction: column; align-items: flex-start; }
+}
